@@ -1,0 +1,111 @@
+---
+description: Google extension
+globs: 
+alwaysApply: false
+---
+# Chrome Extension Rules
+
+## Extension Structure
+- Follow Chrome Extension Manifest V3 guidelines
+- Use a clear directory structure separating concerns:
+
+```
+extension/
+├── manifest.json        # Extension configuration
+├── background.js        # Background service worker
+├── popup/               # Extension popup UI
+│   ├── popup.html
+│   ├── popup.css
+│   └── popup.js
+├── content/             # Content scripts
+│   ├── content.js
+│   └── content.css
+├── options/             # Options page
+│   ├── options.html
+│   ├── options.css
+│   └── options.js
+├── assets/              # Static assets
+│   ├── icons/
+│   └── images/
+└── lib/                 # Shared libraries
+```
+
+## Manifest Configuration
+- Use descriptive name, version, and description
+- Request minimum permissions necessary
+- Use semantic versioning for extension releases
+- Properly declare content scripts with appropriate matches
+- Define clear extension icons in multiple sizes
+
+## JavaScript Best Practices
+- Use ES6+ syntax where supported
+- Implement proper error handling
+- Use asynchronous programming patterns (Promises, async/await)
+- Modularize code into logical components
+- Avoid polluting global namespace
+- Use proper event delegation for DOM events
+
+## Security Considerations
+- Follow Content Security Policy (CSP) best practices
+- Sanitize any user-generated content
+- Use web-accessible resources carefully
+- Be cautious with executeScript and insertCSS
+- Validate all messages between components
+- Store sensitive data securely
+
+## Communication Patterns
+- Use proper messaging between components:
+  - Content scripts <-> Background script: `chrome.runtime.sendMessage()` and `chrome.tabs.sendMessage()`
+  - Between content scripts: Use custom events or background as relay
+- Handle message lifecycle properly
+
+## API Integration
+- Implement robust error handling for API calls
+- Use appropriate authentication methods
+- Handle rate limiting and throttling
+- Cache API responses when appropriate
+- Implement retry logic for failed requests
+
+## UI Considerations
+- Design a consistent and intuitive UI
+- Follow Google's Material Design guidelines
+- Support dark mode when possible
+- Ensure responsive design in popup and options pages
+- Provide clear feedback for user actions
+- Maintain accessibility standards
+
+## State Management
+- Use appropriate state management for complexity:
+  - Simple: chrome.storage API
+  - Medium: Custom state management
+  - Complex: Consider lightweight libraries
+- Sync state between components appropriately
+
+## Testing
+- Implement unit tests for core logic
+- Test with different Chrome versions
+- Test in different browser contexts (incognito, etc.)
+- Test permission scenarios
+- Implement end-to-end testing for critical flows
+
+## Performance
+- Minimize background script activity
+- Use event-driven programming for background processes
+- Optimize content script injection (run_at, matches)
+- Use browser action or page action appropriately
+- Minimize DOM operations in content scripts
+
+## Distribution
+- Prepare comprehensive store listing
+- Create clear screenshots and promotional imagery
+- Write detailed usage instructions
+- Implement feedback collection mechanism
+- Plan update strategy and versioning
+
+## Documentation
+- Document API interfaces
+- Document architecture decisions
+- Maintain README with setup and development instructions
+- Document known issues and limitations
+- Keep changelog for version history
+

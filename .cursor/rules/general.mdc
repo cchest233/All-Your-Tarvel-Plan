@@ -1,0 +1,156 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# General Project Rules
+
+## Project Structure
+
+```
+travel-plan-app/
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── .env.example
+├── run.py
+├── app/                    # Backend application
+├── frontend/               # Frontend web interface
+├── extension/              # Chrome extension (future)
+├── tests/                  # Test directory
+├── data/                   # Data directory
+├── prompts/                # Prompt templates
+└── docs/                   # Documentation
+```
+
+## Git and Version Control
+
+### Branch Strategy
+- `main`: Production-ready code
+- `develop`: Integration branch for features
+- Feature branches: `feature/<feature-name>`
+- Bugfix branches: `fix/<issue-description>`
+- Hotfix branches: `hotfix/<issue-description>`
+
+### Commit Message Format
+Follow Conventional Commits specification:
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Types:
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, etc.)
+- `refactor`: Code changes that neither fix bugs nor add features
+- `perf`: Performance improvements
+- `test`: Test-related changes
+- `build`: Build system or dependency changes
+- `ci`: Changes to CI configuration
+- `chore`: Other changes not modifying src or test files
+
+Examples:
+- `feat(api): add endpoint for travel plan generation`
+- `fix(rag): handle empty results from vector store`
+- `docs: update README with setup instructions`
+
+### Pull Requests
+- Create descriptive titles
+- Reference issues when applicable
+- Provide detailed descriptions
+- Keep PRs focused and reasonably sized
+- Add appropriate labels
+
+## Documentation Standards
+
+### Code Documentation
+- All public functions/methods must have docstrings
+- Document parameters, return values, and exceptions
+- Document complex algorithms and non-obvious behavior
+- Keep documentation close to the code
+
+### Project Documentation
+- `README.md`: Project overview, setup instructions
+- `docs/`: Detailed documentation
+  - Architecture diagrams
+  - API specifications
+  - User guides
+  - Development guides
+
+## Environment Setup
+
+- Use virtual environments for Python
+- Document all environment variables in `.env.example`
+- Never commit `.env` files or credentials
+- Document external service dependencies
+
+## Error Handling
+
+- Use appropriate exception types
+- Log errors with context
+- Return user-friendly error messages
+- Include error codes for API responses
+- Handle edge cases gracefully
+
+## Performance Considerations
+
+- Profile code to identify bottlenecks
+- Use caching where appropriate
+- Consider pagination for large datasets
+- Monitor resource usage
+- Implement timeout handling for external services
+
+## Accessibility and Internationalization
+
+- Design with accessibility in mind
+- Use semantic HTML
+- Prepare for internationalization
+- Support keyboard navigation
+- Test with assistive technologies
+
+## Code Review Guidelines
+
+### Reviewer Responsibilities
+- Check code style and conventions
+- Verify functionality
+- Look for security issues
+- Assess test coverage
+- Provide constructive feedback
+
+### Author Responsibilities
+- Respond to review comments promptly
+- Explain complex changes
+- Update code based on feedback
+- Keep PRs focused and manageable
+
+## Continuous Integration/Deployment
+
+- Run tests on each PR
+- Enforce code style checks
+- Analyze code quality
+- Check for security vulnerabilities
+- Automate deployment processes
+
+## Security Best Practices
+
+- Keep dependencies updated
+- Implement proper authentication and authorization
+- Validate all user inputs
+- Follow the principle of least privilege
+- Conduct regular security reviews
+- Use HTTPS for all communications
+- Implement proper CORS policies
+
+## Monitoring and Logging
+
+- Implement structured logging
+- Set appropriate log levels
+- Monitor application health
+- Track performance metrics
+- Set up alerts for critical issues
+

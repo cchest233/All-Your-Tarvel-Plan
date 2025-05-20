@@ -1,0 +1,91 @@
+---
+description: When doing backend work
+globs: 
+alwaysApply: false
+---
+# Python Backend Rules
+
+## Code Style
+- Follow PEP 8 conventions
+- Maximum line length: 88 characters
+- Use 4 spaces for indentation (no tabs)
+- Use Google style docstrings for documentation
+
+## Naming Conventions
+- Modules and packages: lowercase with no underscores (e.g., `travelapp`, `utils`)
+- Classes: PascalCase (e.g., `TravelPlanService`, `GoogleMapsClient`)
+- Functions and methods: snake_case (e.g., `generate_travel_plan()`, `retrieve_data()`)
+- Variables: snake_case (e.g., `travel_days`, `user_preferences`)
+- Constants: UPPER_SNAKE_CASE (e.g., `MAX_QUERY_RESULTS`, `DEFAULT_TIMEOUT`)
+- Private methods/attributes: prefix with underscore (e.g., `_private_method()`)
+
+## Import Structure
+- Group imports in the following order (with a blank line between groups):
+  1. Standard library imports
+  2. Related third-party imports
+  3. Local application imports
+- Sort alphabetically within each group
+```python
+# Example
+import os
+import sys
+
+import langchain
+import requests
+
+from app.models import TravelPlan
+from app.utils import format_response
+```
+
+## Project Structure (Flask/Django)
+```
+app/
+├── __init__.py
+├── config.py
+├── api/
+│   ├── __init__.py
+│   ├── routes.py
+│   └── views/
+├── models/
+├── services/
+├── rag/
+├── clients/
+├── vector_store/
+├── utils/
+└── exceptions/
+```
+
+## Testing
+- Use pytest for unit tests
+- Place tests in a dedicated `tests` directory
+- Name test files with `test_` prefix
+- Test file structure should mirror the module structure
+- Use fixtures in conftest.py for reusable test components
+
+## Tools and Linting
+- Black: Code formatting
+- isort: Import sorting
+- flake8: Style guide enforcement
+- mypy (optional): Static type checking
+- pylint: Comprehensive linting
+
+## RESTful API Design
+- Use plural nouns for resources (e.g., `/api/v1/travel-plans`)
+- Use appropriate HTTP methods (GET, POST, PUT, DELETE)
+- Return appropriate status codes
+- Implement proper error handling
+- Document endpoints with OpenAPI/Swagger
+
+## Environment and Dependencies
+- Use virtualenv, venv, or poetry for environment isolation
+- Keep dependencies in requirements.txt or Pipfile
+- Pin dependency versions for reproducibility
+- Use .env files for environment-specific configurations (add to .gitignore)
+
+## Security Practices
+- Never commit sensitive information
+- Validate all user inputs
+- Use parameterized queries for database operations
+- Implement proper authentication and authorization
+- Set appropriate CORS policies
+
