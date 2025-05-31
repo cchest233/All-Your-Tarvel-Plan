@@ -1,0 +1,9 @@
+flask==2.3.3
+flask-cors==4.0.0
+langchain==0.1.1
+langchain-core==0.1.10
+langchain-community==0.0.13
+python-dotenv==1.0.0
+openai==1.10.0
+httpx==0.25.2
+psutil==5.9.6 

@@ -1,94 +1,56 @@
-# All-Your-Travel-Plan
+# 🚀 全栈旅行聊天应用
 
-一个AI驱动的旅行规划应用，根据用户偏好生成个性化旅行行程。利用检索增强生成（RAG）技术，系统结合来自小红书和Google地图的数据，创建详细的旅行计划。
+基于 **DeepSeek V3** 的现代化全栈聊天应用，采用微服务架构。
 
-## 主要功能
+## 🎯 快速开始
 
-- **个性化行程**: 根据旅行时长、偏好和兴趣创建自定义旅行计划
-- **AI驱动推荐**: 利用DeepSeek API和RAG生成上下文感知的建议
-- **多源数据**: 结合小红书和Google地图的信息提供全面的推荐
-- **日程规划**: 获取优化的日程安排，包括景点、餐厅和活动
+```bash
+# 1. 配置API密钥
+echo "DEEPSEEK_API_KEY=your_api_key" > .env
 
-使用Python (Flask/Django)作为后端，向量数据库进行高效数据检索，并提供响应式Web界面。未来开发计划包括支持Google Chrome扩展以提供增强的可访问性。
+# 2. 启动应用
+python scripts/start_new_stack.py
 
-## 项目结构
-
-```
-travel-plan-app/
-├── app/                    # 应用包
-│   ├── __init__.py          # 应用初始化
-│   ├── api/                 # API模块
-│   │   ├── __init__.py        # API模块初始化
-│   │   └── routes.py          # API路由定义
-│   ├── chains/              # Langchain处理链
-│   │   ├── __init__.py        # Chains模块初始化
-│   │   └── travel_planner.py  # 旅行规划Chain
-│   ├── llm/                 # LLM集成
-│   │   ├── __init__.py        # LLM模块初始化
-│   │   └── deepseek.py        # DeepSeek LLM集成
-│   └── mcp/                 # 小红书MCP协议集成
-│       ├── __init__.py        # MCP模块初始化
-│       └── client.py          # MCP客户端实现
-├── config.example.py        # 配置示例
-├── requirements.txt         # 依赖列表
-└── run.py                   # 应用启动脚本
+# 3. 访问应用
+# http://localhost:3001
 ```
 
-## 安装与设置
+## 🏗️ 技术架构
 
-1. 克隆仓库:
-   ```bash
-   git clone https://github.com/your-username/All-Your-Travel-Plan.git
-   cd All-Your-Travel-Plan
-   ```
-
-2. 创建虚拟环境:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/macOS
-   venv\Scripts\activate     # Windows
-   ```
-
-3. 安装依赖:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. 配置环境:
-   - 复制 `config.example.py` 为 `config.py`
-   - 设置 DeepSeek API 密钥等必要配置
-
-5. 运行应用:
-   ```bash
-   python run.py
-   ```
-
-## API使用
-
-### 创建旅行计划
-
-**POST** `/api/v1/travel-plan`
-
-请求体:
-```json
-{
-  "location": "杭州",
-  "duration": 3,
-  "preferences": "喜欢文化景点，对美食感兴趣，较少购物"
-}
+```
+🐍 Python (5000端口) ←→ ⚡ Node.js (3000端口) ←→ 🌐 Next.js (3001端口)
+   DeepSeek V3核心         Express中间层          React前端界面
 ```
 
-### 获取景点信息
+## 📁 项目结构
 
-**GET** `/api/v1/attractions?location=杭州&categories=文化,自然&limit=5`
+```
+项目根目录/
+├── 🐍 python-llm/             # Python LLM服务
+├── ⚡ backend/                # Node.js Express后端
+├── 🌐 frontend-next/          # Next.js React前端
+├── 📚 docs/                  # 详细文档
+├── 🔧 scripts/               # 启动脚本
+├── 🐳 docker-compose.yml     # Docker部署
+└── 📄 package.json           # 根工作空间
+```
 
-### 获取餐厅信息
+## 📚 文档
 
-**GET** `/api/v1/restaurants?location=杭州&cuisine_types=浙菜,川菜&limit=5`
+- **[详细说明](docs/README.md)** - 完整项目文档
+- **[快速启动](docs/QUICK_START.md)** - 详细启动指南
+- **[架构设计](.cursor/rules/architecture.mdc)** - 技术架构文档
 
-## 技术栈
+## 🛠️ 开发环境
 
-- **后端**: Flask, Langchain
-- **LLM**: DeepSeek API
-- **数据源**: 小红书MCP协议 (准备集成)
+- Node.js >= 18.0.0  
+- Python >= 3.8
+- DeepSeek API密钥
 
+## 📄 许可证
+
+MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+---
+
+**⭐ 给个星标支持项目发展！** 

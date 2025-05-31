@@ -1,0 +1,76 @@
+# 🐳 全栈旅行聊天应用 Docker配置
+# 微服务架构: Python LLM + Node.js + Next.js
+
+version: '3.8'
+
+services:
+  # 🐍 Python LLM服务 (端口5000)
+  python-llm:
+    build:
+      context: ./python-llm
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - PYTHONPATH=/app
+      - FLASK_ENV=production
+    volumes:
+      - ./python-llm:/app
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ⚡ Node.js后端 (端口3000)  
+  node-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PYTHON_LLM_URL=http://python-llm:5000
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - python-llm
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 🌐 Next.js前端 (端口3001)
+  nextjs-frontend:
+    build:
+      context: ./frontend-next
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+    volumes:
+      - ./frontend-next:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - node-backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  logs:
+    driver: local 
